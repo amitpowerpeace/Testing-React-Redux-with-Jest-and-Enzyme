@@ -5,8 +5,9 @@ import SharedButton from './component/button';
 import ListItem from './component/listItem';
 import { connect } from 'react-redux';
 import { fetchPosts } from './actions';
+import {loadUserAuth} from '@connect/nav-middleware/reducers/auth'
 import './app.scss';
-
+//@connect/nav-middleware/reducers/auth
 /* This const is not used within our app.
    Although we are passing it to the Headline Component
    it is only here as an exampleof testing PropTypes */
@@ -35,6 +36,9 @@ class App extends Component {
   fetch(){
     this.props.fetchPosts();
     this.exampleMethod_updatesState();
+  }
+  componentDidMount() {
+    this.props.loadUserAuth();
   }
 
   exampleMethod_updatesState() {
@@ -93,4 +97,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, {fetchPosts})(App);
+export default connect(mapStateToProps, {fetchPosts,loadUserAuth})(App);

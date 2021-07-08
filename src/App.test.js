@@ -2,12 +2,18 @@ import App from './App';
 import { shallow } from 'enzyme';
 import { findByTestAtrr, testStore } from './../Utils';
 import React from 'react';
+import {loadUserAuth} from '@connect/nav-middleware/reducers/auth'
 
 const setUp = (initialState={}) => {
     const store = testStore(initialState);
     const wrapper = shallow(<App store={store} />).childAt(0).dive();
     return wrapper;
 };
+jest.mock('module',()=>({
+    __esModule: true,                    // this makes it work
+    loadUserAuth: jest.fn()
+  }));
+  
 
 describe('App Component', () => {
 
